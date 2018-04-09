@@ -163,7 +163,7 @@
                     _this.initBMap(_this);
                 };
                 var script = document.createElement('script');
-                script.src = 'https://api.map.baidu.com/getscript?v=2.0&ak=' + _this.config.ak + '&services=&t=20171031174121';
+                script.src = 'https://api.map.baidu.com/getscript?v=2.0&ak=' + _this.config.ak + '&services=&t=20171031174121&s=1';
                 document.body.appendChild(script);
             } else if (_this.config.mapType == 2) {
                 var script = document.createElement('script');
