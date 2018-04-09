@@ -1,0 +1,104 @@
+{
+  "result": [{
+    "vehicleId": 126,
+    "plateNumber": "粤YZZ361",
+    "loadWeight": 1495,
+    "loadVolumn": 15,
+    "autobrandName": "江铃汽车",
+    "autouseTypeName": "其他",
+    "automodelName": "宝典",
+    "autoTags": 1,
+    "autoTagsName": "自有车辆",
+    "trackInfo": {
+      "time": "2017-12-11 12:06:36",
+      "speed": "-3.60",
+      "opTags": 5,
+      "radius": 65,
+      "lng": 113.3211955150703,
+      "lat": 23.14679379905952
+    },
+    "online": "0"
+  }, {
+    "vehicleId": 127,
+    "plateNumber": "粤Y32S76",
+    "loadWeight": 705,
+    "loadVolumn": 6,
+    "autobrandName": "五菱",
+    "autouseTypeName": "其他",
+    "automodelName": "荣光",
+    "autoTags": 1,
+    "autoTagsName": "自有车辆",
+    "trackInfo": {
+      "time": "2017-12-11 12:06:18",
+      "speed": "-3.60",
+      "radius": 65,
+      "lng": 113.3213000304244,
+      "lat": 23.1466707893551
+    },
+    "online": "0"
+  }, {
+    "vehicleId": 128,
+    "plateNumber": "粤YY7890",
+    "loadWeight": 0,
+    "loadVolumn": 2,
+    "autobrandName": "五菱",
+    "autouseTypeName": "其他",
+    "automodelName": "荣光",
+    "autoTags": 1,
+    "autoTagsName": "自有车辆",
+    "trackInfo": {
+      "time": "2017-12-25 18:28:21",
+      "speed": "-1",
+      "locType": "网络",
+      "radius": 40,
+      "lng": 113.321530,
+      "lat": 23.14560
+    },
+    "online": "0"
+  }, {
+    "vehicleId": 129,
+    "plateNumber": "粤Y0Y102",
+    "loadWeight": 1495,
+    "loadVolumn": 16,
+    "autobrandName": "福田伽途",
+    "autouseTypeName": "其他",
+    "automodelName": "伽途V5",
+    "autoTags": 1,
+    "autoTagsName": "自有车辆",
+    "trackInfo": null,
+    "online": "0"
+  }, {
+    "vehicleId": 130,
+    "plateNumber": "粤Y0Y793",
+    "loadWeight": 1495,
+    "loadVolumn": 16,
+    "autobrandName": "福田伽途",
+    "autouseTypeName": "其他",
+    "automodelName": "伽途V5",
+    "autoTags": 1,
+    "autoTagsName": "自有车辆",
+    "trackInfo": {
+      "time": "2017-12-06 15:16:05",
+      "speed": "-3.60",
+      "opTags": 6,
+      "radius": 65,
+      "lng": 113.32216376647457,
+      "lat": 23.146694113843843
+    },
+    "online": "1"
+  }, {
+    "vehicleId": 134,
+    "plateNumber": "粤AG14X6",
+    "loadWeight": 820,
+    "loadVolumn": 7,
+    "autobrandName": "上汽大通",
+    "autouseTypeName": "其他",
+    "automodelName": "上汽大通",
+    "autoTags": 1,
+    "autoTagsName": "自有车辆",
+    "trackInfo": null,
+    "online": "0"
+  }],
+  "msg": "",
+  "success": true
+}
