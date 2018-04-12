@@ -171,12 +171,12 @@
 
                 // document.body.appendChild(script);
 
-                function loadJScript() {
-                    var script = document.createElement("script");
-                    script.type = "text/javascript";
-                    script.src = "https://api.map.baidu.com/api?v=2.0&ak=lookqDAv8VjHVjccO5r2nvCcObvwedc0&callback=init&s=1";
-                    document.body.appendChild(script);
-                }
+                // function loadJScript() {
+                var script = document.createElement("script");
+                script.type = "text/javascript";
+                script.src = "https://api.map.baidu.com/api?v=2.0&ak=lookqDAv8VjHVjccO5r2nvCcObvwedc0&callback=init&s=1";
+                document.body.appendChild(script);
+                // }
 
                 function init() {
                     insertCssOrJs(mapToolUrls.EventWrapper);
@@ -186,7 +186,7 @@
                     _this.initBMap(_this);
                 }
 
-                window.onload = loadJScript; //异步加载地图
+                // window.onload = loadJScript; //异步加载地图
 
             } else if (_this.config.mapType == 2) {
                 var script = document.createElement('script');
