@@ -171,12 +171,13 @@
 
                 // document.body.appendChild(script);
 
-                // function loadJScript() {
                 var script = document.createElement("script");
+
                 script.type = "text/javascript";
-                script.src = "https://api.map.baidu.com/api?v=2.0&ak=lookqDAv8VjHVjccO5r2nvCcObvwedc0&callback=init&s=1";
+
+                script.src = "https://api.map.baidu.com/api?v=3.0&ak=" + _this.config.ak + "&callback=init&s=1";
+
                 document.body.appendChild(script);
-                // }
 
                 function init() {
                     insertCssOrJs(mapToolUrls.EventWrapper);
