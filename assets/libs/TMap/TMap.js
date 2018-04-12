@@ -172,11 +172,11 @@
                 script.src = 'https://api.map.baidu.com/api?v=2.0&ak=' + _this.config.ak + '&s=1';
 
                 script.onload = function () {
+                    _this.initBMap(_this);
+
                     insertCssOrJs(mapToolUrls.EventWrapper);
 
                     loadCssOrJs(_this.config.insertUrls);
-
-                    _this.initBMap(_this);
                 }
 
                 document.body.appendChild(script);
