@@ -9,17 +9,17 @@
 // 3、
 
 
-(function(window, factory) {
+(function (window, factory) {
 
     window.TMap = factory();
 
-})(this, function() {
+})(this, function () {
 
     'use strict'
 
-    if (typeof(Promise) === "function") {
+    if (typeof (Promise) === "function") {
         var mapPromise = {};
-        mapPromise.promise = new Promise(function(resolve, reject) {
+        mapPromise.promise = new Promise(function (resolve, reject) {
             mapPromise.resolve = resolve;
             mapPromise.reject = reject;
         });
@@ -132,7 +132,7 @@
         }
     }
 
-    var TMap = function(options) {
+    var TMap = function (options) {
 
         var _this = this;
 
@@ -153,7 +153,7 @@
             if (_this.config.mapType == 1) {
                 window.BMap_loadScriptTime = (new Date).getTime();
                 window.BMap = window.BMap || {};
-                window.BMap.apiLoad = function() {
+                window.BMap.apiLoad = function () {
                     delete window.BMap.apiLoad;
 
                     insertCssOrJs(mapToolUrls.EventWrapper);
@@ -163,12 +163,12 @@
                     _this.initBMap(_this);
                 };
                 var script = document.createElement('script');
-                script.src = 'https://api.map.baidu.com/getscript?v=2.0&ak=' + _this.config.ak + '&services=&t=20171031174121&s=1';
+                script.src = 'https://api.map.baidu.com/getscript?v=2.0&ak=' + _this.config.ak + '&services=&s=1';
                 document.body.appendChild(script);
             } else if (_this.config.mapType == 2) {
                 var script = document.createElement('script');
                 script.src = 'https://webapi.amap.com/maps?v=1.4.1&key=' + _this.config.ak + '';
-                script.onload = function() {
+                script.onload = function () {
                     _this.initAMap(_this);
                 }
                 document.body.appendChild(script);
@@ -188,7 +188,7 @@
     };
 
     TMap.prototype = {
-        extend: function() {
+        extend: function () {
             var _this = this;
             var options, name, src, copy, copyIsArray, clone,
                 target = arguments[0] || {},
@@ -242,7 +242,7 @@
             // 返回修改的目标对象
             return target;
         },
-        initBMap: function(_this) {
+        initBMap: function (_this) {
             var map = new BMap.Map("allmap"); // 创建Map实例
             var point = new BMap.Point(116.404, 39.915); // 创建点坐标
             map.centerAndZoom(_this.config.initCity || point, _this.config.zoom || 15);
@@ -362,24 +362,24 @@
             }
             _this.map = map;
 
-            _this.map.addEventListener('tilesloaded', function() {
+            _this.map.addEventListener('tilesloaded', function () {
                 mapPromise.resolve(_this);
             })
         },
-        initAMap: function(_this) {
+        initAMap: function (_this) {
             var map = new AMap.Map('allmap', {
                 center: [117.00, 36.68],
                 zoom: 6
             });
-            map.plugin(["AMap.ToolBar"], function() {
+            map.plugin(["AMap.ToolBar"], function () {
                 map.addControl(new AMap.ToolBar());
             });
             mapPromise.resolve(this);
             _this.map = map;
         },
-        setBaseType: function(view) { //设置地图类型
+        setBaseType: function (view) { //设置地图类型
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 if (view == 'normal') {
                     _this.map.setMapType(BMAP_NORMAL_MAP); // BMAP_NORMAL_MAP 此地图类型展示普通街道视图
                 }
@@ -391,15 +391,15 @@
                 }
             });
         },
-        setBaseStyle: function(json) { //设置地图底图（启用后街道以下的层级可能无法显示）
+        setBaseStyle: function (json) { //设置地图底图（启用后街道以下的层级可能无法显示）
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 _this.map.setMapStyle({
                     styleJson: json
                 });
             });
         },
-        mapOverlay: function(options) { //添加覆盖物
+        mapOverlay: function (options) { //添加覆盖物
             /*
             1 -> marker
             2 -> polyline
@@ -445,7 +445,7 @@
             };
             this.extend(config, options);
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 var overlay, points = [];
                 var attribute = config.attribute;
                 var pointList = config.pointList ? config.pointList : [];
@@ -494,13 +494,13 @@
                 attribute.isAdd ? _this.map.addOverlay(overlay) : null;
             });
         },
-        setTraffic: function(options) { //交通实时路况
+        setTraffic: function (options) { //交通实时路况
             var config = {
                 isShowBtn: false
             }
             this.extend(config, options);
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 if (_this.isTraffic) {
                     _this.map.trafficCtrl = new BMapLib.TrafficControl();
                     _this.map.addControl(_this.map.trafficCtrl);
@@ -520,7 +520,7 @@
                 _this.isTraffic = !_this.isTraffic;
             });
         },
-        setMapType: function(options) { //切换地图类型
+        setMapType: function (options) { //切换地图类型
             /*
             0 ->  BMAP_NORMAL_MAP	         此地图类型展示普通街道视图
             1 ->  BMAP_HYBRID_MAP	         此地图类型展示卫星和路网的混合视图
@@ -532,7 +532,7 @@
             };
             this.extend(config, options);
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 var typeName = BMAP_NORMAL_MAP;
                 if (config.type == 0) {
                     typeName = BMAP_NORMAL_MAP;
@@ -546,7 +546,7 @@
                 _this.map.setMapType(typeName);
             });
         },
-        geoUtils: function(options) { //几何计算
+        geoUtils: function (options) { //几何计算
             var config = {
                 point: null,
                 rectangle: null,
@@ -560,7 +560,7 @@
             };
             this.extend(config, options);
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 var result = null;
                 if (config.rectangle) { //点是否在矩形内
                     result = BMapLib.GeoUtils.isPointInRect(config.point, config.rectangle.getBounds());
@@ -588,7 +588,7 @@
                 }
             });
         },
-        showInfoBox: function(options) { //显示窗口
+        showInfoBox: function (options) { //显示窗口
             var config = {
                 isOpen: true,
                 isClose: false,
@@ -607,7 +607,7 @@
             };
             this.extend(config, options);
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 if (config.name) {
                     config.name.close();
                 }
@@ -621,12 +621,12 @@
                         enableAutoPan: config.isAutopan,
                         offset: new BMap.Size(config.boxOffset.x, config.boxOffset.y)
                     });
-                    infoBoxPanel.addEventListener("close", function(e) {
+                    infoBoxPanel.addEventListener("close", function (e) {
                         if (config.closeFn) {
                             config.closeFn();
                         }
                     });
-                    infoBoxPanel.addEventListener("open", function(e) {
+                    infoBoxPanel.addEventListener("open", function (e) {
                         if (config.openFn) {
                             config.openFn();
                         }
@@ -640,7 +640,7 @@
                 }
             });
         },
-        changeAttribute: function(options) { //改变overlay属性
+        changeAttribute: function (options) { //改变overlay属性
             var config = {
                 type: null,
                 icon: null,
@@ -655,7 +655,7 @@
             }
             this.extend(config, options);
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 if (config.position) {
                     if (config.type == 'marker') {
                         config.overlay.setPosition(new BMap.Point(config.position.lng, config.position.lat));
@@ -696,7 +696,7 @@
                 }
             });
         },
-        eventWrapper: function(options) { //事件包装器
+        eventWrapper: function (options) { //事件包装器
             var config = {
                 name: null,
                 type: null,
@@ -707,24 +707,24 @@
             };
             this.extend(config, options);
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 if (config.type == 'dom') { //添加DOM事件监听函数
-                    BMapLib.EventWrapper.addDomListener(document.getElementById(config.id), config.bind, function(e) {
+                    BMapLib.EventWrapper.addDomListener(document.getElementById(config.id), config.bind, function (e) {
                         config.callback(e);
                     });
                 }
                 if (config.type == 'domOnce') { //添加DOM事件监听函数，函数仅执行一次
-                    BMapLib.EventWrapper.addDomListenerOnce(document.getElementById(config.id), config.bind, function(e) {
+                    BMapLib.EventWrapper.addDomListenerOnce(document.getElementById(config.id), config.bind, function (e) {
                         config.callback(e);
                     });
                 }
                 if (config.type == 'nomal') { //添加地图事件监听函数                
-                    BMapLib.EventWrapper.addListener(config.id, config.bind, function(e) {
+                    BMapLib.EventWrapper.addListener(config.id, config.bind, function (e) {
                         config.callback(e);
                     });
                 }
                 if (config.type == 'nomalOnce') { //添加地图事件监听函数，函数仅执行一次
-                    BMapLib.EventWrapper.addListenerOnce(config.id, config.bind, function(e) {
+                    BMapLib.EventWrapper.addListenerOnce(config.id, config.bind, function (e) {
                         config.callback(e);
                     });
                 }
@@ -742,7 +742,7 @@
                 }
             });
         },
-        addOverlays: function(overlay) { //添加覆盖物
+        addOverlays: function (overlay) { //添加覆盖物
             var _this = this;
             if (overlay instanceof Array) {
                 if (overlay.length > 0) {
@@ -757,7 +757,7 @@
                 _this.map.addOverlay(overlay);
             }
         },
-        removeOverlays: function(overlay) { //移除覆盖物
+        removeOverlays: function (overlay) { //移除覆盖物
             var _this = this;
             if (overlay instanceof Array) {
                 if (overlay.length > 0) {
@@ -772,7 +772,7 @@
                 _this.map.removeOverlay(overlay);
             }
         },
-        drawOverlays: function(options) { //画覆盖物方法 ？？？
+        drawOverlays: function (options) { //画覆盖物方法 ？？？
             var config = {
                 bind: 'overlaycomplete',
                 styleOptions: {
@@ -786,7 +786,7 @@
             };
             this.extend(config, options);
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 if (!_this.drawingManager) { //实例化鼠标绘制工具
                     _this.drawingManager = new BMapLib.DrawingManager(_this.map, {
                         isOpen: false, //是否开启绘制模式
@@ -820,13 +820,13 @@
                 }
                 _this.drawingManager.open();
                 _this.drawingManager.setDrawingMode(drawType);
-                BMapLib.EventWrapper.addListenerOnce(_this.drawingManager, "overlaycomplete", function(e) {
+                BMapLib.EventWrapper.addListenerOnce(_this.drawingManager, "overlaycomplete", function (e) {
                     _this.drawingManager.close();
                     config.callback(e.overlay);
                 });
             });
         },
-        addRightMenu: function(options) { //添加右键菜单栏
+        addRightMenu: function (options) { //添加右键菜单栏
             var config = {
                 overlay: null,
                 menuList: null,
@@ -834,7 +834,7 @@
             };
             this.extend(config, options);
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 var menu = new BMap.ContextMenu();
                 var txtMenuItem = config.menuList;
                 for (var i = 0; i < txtMenuItem.length; i++) {
@@ -845,7 +845,7 @@
                 config.overlay.addContextMenu(menu);
             });
         },
-        pullBox: function(options) { //拉框搜索
+        pullBox: function (options) { //拉框搜索
             /*
                 renderOptions: {
                     // map: {Map} 搜索结果显示设置
@@ -868,7 +868,7 @@
             };
             this.extend(config, options);
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 if (!config.name) {
                     var pullBox = new BMapLib.SearchInRectangle(_this.map, config.keyword, {
                         renderOptions: {
@@ -880,7 +880,7 @@
                             autoClose: true,
 
                         },
-                        onSearchComplete: function(e) {
+                        onSearchComplete: function (e) {
                             console.log(e);
                         },
                     });
@@ -892,7 +892,7 @@
                 }
             });
         },
-        markerClusterer: function(options) { //点聚合
+        markerClusterer: function (options) { //点聚合
             /*
                 // markers {Array} 要聚合的标记数组
                 // girdSize {Number} 聚合计算时网格的像素大小，默认60
@@ -908,7 +908,7 @@
             };
             this.extend(config, options);
             var _this = this;
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 var markerClusterer = new BMapLib.MarkerClusterer(_this.map, {
                     markers: config.markers,
                     maxZoom: config.maxZoom
@@ -918,7 +918,7 @@
                 }
             });
         },
-        drivingRoute: function(options) { //路径生成
+        drivingRoute: function (options) { //路径生成
             var config = {
                 pointList: null,
                 polylineColor: "#a6e50f", //#a6e50f #FF7800 #FF3030 红  #00FF7F 绿 #292929 黑 #1C86EE 蓝 #0000FF 纯蓝
@@ -928,7 +928,7 @@
             };
             var _this = this;
             _this.extend(config, options);
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 var drivingPoints = [],
                     routeDistance = 0,
                     dravingPolylines = [];
@@ -939,7 +939,7 @@
                 var mode = drivingPoints.length % 11;
                 var viewNum = 0;
                 var driving = new BMap.DrivingRoute(_this.map, {
-                    onSearchComplete: function(results) {
+                    onSearchComplete: function (results) {
                         if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
                             var plan = driving.getResults().getPlan(0);
                             routeDistance += Number((driving.getResults().getPlan(0).getDistance()).toString().replace("公里", ""));
@@ -986,7 +986,7 @@
                 }
             });
         },
-        searchAddr: function(options) { //地址搜索
+        searchAddr: function (options) { //地址搜索
             /*
             type:
                 1 -> 输入地址地图标记
@@ -1003,7 +1003,7 @@
             };
             var _this = this;
             _this.extend(config, options);
-            mapPromise.promise.then(function() {
+            mapPromise.promise.then(function () {
                 var pt = {};
                 var marker = {};
                 var error = "";
@@ -1013,7 +1013,7 @@
                     _this.map.removeOverlay(config.marker);
                 }
                 if (config.type == 1) {
-                    geoc.getPoint(config.text, function(point) {
+                    geoc.getPoint(config.text, function (point) {
                         if (point) {
                             pt = point;
                             nextDo(pt);
@@ -1022,7 +1022,7 @@
                         }
                     }, config.initCity);
                 } else {
-                    _this.map.addEventListener("click", function(e) {
+                    _this.map.addEventListener("click", function (e) {
                         pt = e.point;
                         nextDo(pt);
                     });
@@ -1041,21 +1041,21 @@
                         config.marker = new BMap.Marker(pt);
                     }
                     _this.map.addOverlay(config.marker);
-                    geoc.getLocation(pt, function(e) {
+                    geoc.getLocation(pt, function (e) {
                         var addComp = e.addressComponents;
                         if (config.delMarker) {
                             var addressInfoWindow = new BMap.InfoWindow("<div>地址：" + addComp.province + addComp.city + addComp.district + "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + addComp.street + addComp.streetNumber + "</div>" + "<div style='float:right;'><a id='delAdsP'>删除</a></div>", {
                                 offset: new BMap.Size(-3, 25)
                             });
-                            addressInfoWindow.addEventListener('open', function() {
+                            addressInfoWindow.addEventListener('open', function () {
                                 var delInforWidow = document.getElementById('delAdsP');
-                                delInforWidow.addEventListener("click", function() {
+                                delInforWidow.addEventListener("click", function () {
                                     _this.map.removeOverlay(config.marker);
                                 });
                             })
                             config.marker.infoBox = addressInfoWindow;
                             config.marker.openInfoWindow(addressInfoWindow);
-                            config.marker.addEventListener("click", function() {
+                            config.marker.addEventListener("click", function () {
                                 config.marker.openInfoWindow(addressInfoWindow);
                             })
                         }
