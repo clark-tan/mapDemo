@@ -171,25 +171,24 @@
 
                 // document.body.appendChild(script);
 
-                var script = document.createElement("script");
+                window.BMAP_PROTOCOL = "https";
 
-                script.type = "text/javascript";
+                window.BMap_loadScriptTime = (new Date).getTime();
 
-                script.src = "https://api.map.baidu.com/api?v=3.0&ak=" + _this.config.ak + "&callback=init&s=1";
+                window.BMap = window.BMap || {};
 
-                document.body.appendChild(script);
+                window.BMap.apiLoad = function () {
+                    delete window.BMap.apiLoad;
+                    if (typeof init == "function") {
+                        init()
+                    }
+                };
 
-                function init() {
-                    alert(1);
+                var s = document.createElement('script');
 
-                    insertCssOrJs(mapToolUrls.EventWrapper);
+                s.src = 'https://api.map.baidu.com/getscript?v=3.0&ak=' + _this.config.ak + '&services=&t=' + window.BMap_loadScriptTime;
 
-                    loadCssOrJs(_this.config.insertUrls);
-
-                    _this.initBMap(_this);
-                }
-
-                // window.onload = loadJScript; //异步加载地图
+                document.body.appendChild(s);
 
             } else if (_this.config.mapType == 2) {
                 var script = document.createElement('script');
@@ -390,6 +389,10 @@
 
             _this.map.addEventListener('tilesloaded', function () {
                 mapPromise.resolve(_this);
+
+                setTimeout(function () { //删除版权
+                    $('#allmap').find('.anchorBL').remove();
+                }, 1000);
             })
         },
         initAMap: function (_this) {
