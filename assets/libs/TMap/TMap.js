@@ -151,36 +151,43 @@
 
         if (!window.isMap) {
             if (_this.config.mapType == 1) {
-                window.BMap_loadScriptTime = (new Date).getTime();
-                window.BMap = window.BMap || {};
-                window.BMap.apiLoad = function () {
-                    delete window.BMap.apiLoad;
+                // window.BMap_loadScriptTime = (new Date).getTime();
 
+                // window.BMap = window.BMap || {};
+
+                // window.BMap.apiLoad = function () {
+                //     delete window.BMap.apiLoad;
+
+                //     insertCssOrJs(mapToolUrls.EventWrapper);
+
+                //     loadCssOrJs(_this.config.insertUrls);
+
+                //     _this.initBMap(_this);
+                // };
+
+                // var script = document.createElement('script');
+
+                // script.src = 'https://api.map.baidu.com/getscript?v=3.0&ak=' + _this.config.ak + '&services=&t=' + window.BMap_loadScriptTime + '&s=1';
+
+                // document.body.appendChild(script);
+
+                function loadJScript() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://api.map.baidu.com/api?v=2.0&ak=lookqDAv8VjHVjccO5r2nvCcObvwedc0&callback=init&s=1";
+                    document.body.appendChild(script);
+                }
+
+                function init() {
                     insertCssOrJs(mapToolUrls.EventWrapper);
 
                     loadCssOrJs(_this.config.insertUrls);
 
                     _this.initBMap(_this);
-                };
-                var script = document.createElement('script');
-                script.src = 'https://api.map.baidu.com/api?v=2.0&ak=' + _this.config.ak + '&s=1';
-                // script.src = 'https://api.map.baidu.com/getscript?v=3.0&ak=' + _this.config.ak + '&services=&t=20180102152545&s=1';
+                }
 
-                document.body.appendChild(script);
+                window.onload = loadJScript; //异步加载地图
 
-                // var script = document.createElement('script');
-
-                // script.src = 'https://api.map.baidu.com/api?v=2.0&ak=' + _this.config.ak + '&s=1';
-
-                // script.onload = function () {
-                //     _this.initBMap(_this);
-
-                //     insertCssOrJs(mapToolUrls.EventWrapper);
-
-                //     loadCssOrJs(_this.config.insertUrls);
-                // }
-
-                // document.body.appendChild(script);
             } else if (_this.config.mapType == 2) {
                 var script = document.createElement('script');
                 script.src = 'https://webapi.amap.com/maps?v=1.4.1&key=' + _this.config.ak + '';
