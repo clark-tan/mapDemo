@@ -180,6 +180,8 @@
                 document.body.appendChild(script);
 
                 function init() {
+                    console.log(1);
+
                     insertCssOrJs(mapToolUrls.EventWrapper);
 
                     loadCssOrJs(_this.config.insertUrls);
