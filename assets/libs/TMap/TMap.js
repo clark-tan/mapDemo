@@ -179,9 +179,12 @@
 
                 window.BMap.apiLoad = function () {
                     delete window.BMap.apiLoad;
-                    if (typeof init == "function") {
-                        init()
-                    }
+
+                    insertCssOrJs(mapToolUrls.EventWrapper);
+
+                    loadCssOrJs(_this.config.insertUrls);
+
+                    _this.initBMap(_this);
                 };
 
                 var s = document.createElement('script');
